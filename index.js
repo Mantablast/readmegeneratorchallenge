@@ -4,6 +4,7 @@ const fs = require('fs'); //is this really needed?
 const inquirer = require('inquirer');
 const path = require('path');
 const generateMarkdown = require("./utils/generateMarkdown");
+
 // TODO: Create an array of questions for user input
 const questions = () => {
     inquirer.prompt([
@@ -116,28 +117,28 @@ const questions = () => {
     message: 'Please provide examples or instructions for suggested use here:',
     when: ({ confirmUsage }) => confirmUsage
   },
-//Would you like to add screenshots? y/n
-{
-    type: 'confirm',
-    name: 'confirmScreenshot',
-    message: 'Would you like to add screenshots? y/n',
-    default: false
-},
-//Please provide a web based url or relative filepath to your first screenshot.
-{
-    type: 'input',
-    name: 'Screenshot',
-    message: 'Please provide a web based url or relative filepath to your first screenshot.',
-    when: ({ confirmScreenshot }) => confirmScreenshot
-},
-//Would you like to add another screenshot and description? y/n
-{
-    type: 'confirm',
-    name: 'confirmScreenshot',
-    message: 'Would you like to add another screenshot and description? y/n',
-    default: false
-},
-//Please enter the name of a collaborator?
+// //Would you like to add screenshots? y/n  **Commented out sections represent questions I would like to add later to adhere to as suggested by the readme-guide.md
+// {
+//     type: 'confirm',
+//     name: 'confirmScreenshot',
+//     message: 'Would you like to add screenshots? y/n',
+//     default: false
+// },
+// //Please provide a web based url or relative filepath to your first screenshot.
+// {
+//     type: 'input',
+//     name: 'Screenshot',
+//     message: 'Please provide a web based url or relative filepath to your first screenshot.',
+//     when: ({ confirmScreenshot }) => confirmScreenshot
+// },
+// //Would you like to add another screenshot and description? y/n
+// {
+//     type: 'confirm',
+//     name: 'confirmScreenshot',
+//     message: 'Would you like to add another screenshot and description? y/n',
+//     default: false
+// },
+//Please enter the name of a collaborator?  **Contributing
 {
     type: 'confirm',
     name: 'confirmCollaborator',
@@ -150,7 +151,19 @@ const questions = () => {
     message: 'Please provide the name of the collaborator:',
     when: ({ confirmCollaborator }) => confirmCollaborator
   },
-
+//What license does this project have?
+{
+    type: 'list',
+    message: 'What license does this project have? Use the space bar to select an option',
+    name: 'license',
+    choices: ['MIT', 'AGPL-3.0', 'GPL-3.0', 'LGPL-3.0', 'MPL-2.0', 'APACHE-2.0', 'BSL-1.0', 'unlicense']
+},
+//If you have any other information to add to the license section, please enter it here.  If not, just press enter.
+{
+    type: 'input',
+    name: 'licenseInfo',
+    message: 'If you have any other information to add to the license section, please enter it here.  If not, just press enter.'
+},
 //Please enter the github url or personal webpage of this collaborator.
 {
     type: 'input',
@@ -172,54 +185,34 @@ const questions = () => {
     message: 'Would you like to add another collaborator? y/n',
     default: false
 },
-//What license does this project have?
-{
-    type: 'list',
-    message: 'What license does this project have? Use the space bar to select an option',
-    name: 'license',
-    choices: ['MIT', 'agpl-3.0', 'gpl-3.0', 'lgpl-3.0', 'mpl-2.0', 'apache-2.0', 'bsl-1.0', 'unlicense']
-},
-//If you have any other information to add to the license section, please enter it here.  If not, just press enter.
-{
-    type: 'input',
-    name: 'licenseInfo',
-    message: 'If you have any other information to add to the license section, please enter it here.  If not, just press enter.'
-},
-//Select the badges you would like to add to your readme file
-{
-    type: 'checkbox',
-    message: 'Select the badges you would like to add to your readme file:',
-    name: 'badges',
-    choices: ['Github follow badge', 'Github downloads', 'Github repo size', 'Twitter follow']
-},
-//Would you like to add a summary of features? y/n
-{
-    type: 'confirm',
-    name: 'confirmFeature',
-    message: 'Would you like to add a summary of features? y/n',
-    default: false
-},
-//Please add your summary of features here.
-  {
-    type: 'input',
-    name: 'Feature',
-    message: 'Please add your summary of project features here:',
-    when: ({ confirmFeature }) => confirmFeature
-},
-//Are you a supporter and adopter of Contributor Covanent? 
-{
-    type: 'confirm',
-    name: 'confirmFeature',
-    message: 'Are you a supporter and adopter of Contributor Covanent?  y/n (Please visit https://www.contributor-covenant.org/ and thoroughly read through the documentation before selecting "y") Selecting "y" will add a Contributor Covenant badge to your readme file.',
-    default: true
-},
-//Would you like to add a test section to your readme? y/n
-{
-    type: 'confirm',
-    name: 'confirmTest',
-    message: 'Would you like to add a test section to your readme? y/n',
-    default: true
-},
+// //Select the badges you would like to add to your readme file
+// {
+//     type: 'checkbox',
+//     message: 'Select the badges you would like to add to your readme file:',
+//     name: 'badges',
+//     choices: ['Github follow badge', 'Github downloads', 'Github repo size', 'Twitter follow']
+// },
+// //Would you like to add a summary of features? y/n
+// {
+//     type: 'confirm',
+//     name: 'confirmFeature',
+//     message: 'Would you like to add a summary of features? y/n',
+//     default: false
+// },
+// //Please add your summary of features here.
+//   {
+//     type: 'input',
+//     name: 'Feature',
+//     message: 'Please add your summary of project features here:',
+//     when: ({ confirmFeature }) => confirmFeature
+// },
+// //Are you a supporter and adopter of Contributor Covanent? 
+// {
+//     type: 'confirm',
+//     name: 'confirmFeature',
+//     message: 'Are you a supporter and adopter of Contributor Covanent?  y/n (Please visit https://www.contributor-covenant.org/ and thoroughly read through the documentation before selecting "y") Selecting "y" will add a Contributor Covenant badge to your readme file.',
+//     default: true
+// },
 //Please add the test information you would like to display on your readme.
 {
     type: 'input',
