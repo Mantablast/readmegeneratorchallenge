@@ -5,11 +5,25 @@ const inquirer = require('inquirer');
 // TODO: Create an array of questions for user input
 const questions = () => {
     inquirer.prompt([
+//Hi, What's your name?
+{
+    type: 'input',
+    name: 'name',
+    message: 'Hi, What is your name? (Required)',
+    validate: projectInput => {
+      if (projectInput) {
+        return true;
+      } else {
+        console.log('Your name is required!  Thank you.');
+        return false;
+      }
+    }
+  },
 //Welcome!  What is your project title?
 {
     type: 'input',
     name: 'title',
-    message: 'Welcome!  What is your project title? (Required)',
+    message: 'Welcome! What is your project title? (Required)',
     validate: projectInput => {
       if (projectInput) {
         return true;
@@ -114,20 +128,6 @@ const questions = () => {
     message: 'Please provide a web based url or relative filepath to your first screenshot.',
     when: ({ confirmScreenshot }) => confirmScreenshot
 },
-//Please add a short description for the screenshot.
-{
-    type: 'input',
-    name: 'ScreenshotDescription',
-    message: 'Please enter a screenshot description: (Required)',
-    validate: ScreenshotDescription => {
-      if (ScreenshotDescription) {
-        return true;
-      } else {
-        console.log('Please enter a screenshot description!');
-        return false;
-      }
-    }
-},
 //Would you like to add another screenshot and description? y/n
 {
     type: 'confirm',
@@ -152,7 +152,7 @@ const questions = () => {
 //Please enter the github url or personal webpage of this collaborator.
 {
     type: 'input',
-    name: 'linkcollaboratorLink',
+    name: 'collaboratorLinkInput',
     message: 'Please enter the github url or personal webpage of this collaborator. (Required)',
     validate: collaboratorLinkInput => {
       if (collaboratorLinkInput) {
@@ -218,33 +218,43 @@ const questions = () => {
     message: 'Would you like to add a test section to your readme? y/n',
     default: true
 },
+//Please add the test information you would like to display on your readme.
 {
     type: 'input',
     name: 'Test',
     message: 'Please add the test information you would like to display on your readme.',
     when: ({ confirmTest }) => confirmTest
-}
-//Please add the test information you would like to display on your readme.
+},
+//Please enter your email so you may be contacted for questions (Required)
+{
+    type: 'input',
+    name: 'email',
+    message: 'Please enter your email so you may be contacted for questions (Required)',
+    validate: email => {
+      if (email) {
+        return true;
+      } else {
+        console.log('Please enter your email!');
+        return false;
+      }
+    }
+  }
 ])
-// .then(readMeData => {
-//     readMeData.projects.push(projectData);
-//     if (projectData.confirmAddProject) {
-//         return promptProject(readMeData);
-//     } else {
-//         return readMeData;
-//     }
 
-//     });
-
+writeToFile(questions);
 };
 
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(questions) {
+    let answers = questions;
+    module.exports = answers;
+}
 
 // TODO: Create a function to initialize app
 function init() {
     questions();
+    console.log("Questions Complete.");
 }
 
 // Function call to initialize app
