@@ -80,7 +80,7 @@ const questions = () => {
     type: 'confirm',
     name: 'confirmDeployedLink',
     message: 'Does your project include a deployed web url? y/n',
-    default: true
+    default: false
   },
   {
     type: 'input',
@@ -107,7 +107,7 @@ const questions = () => {
     type: 'confirm',
     name: 'confirmUsage',
     message: 'Would you like to provide examples or instructions for suggested use? (Recommended) y/n',
-    default: true
+    default: false
   },
   {
     type: 'input',
@@ -141,7 +141,7 @@ const questions = () => {
     type: 'confirm',
     name: 'confirmCollaborator',
     message: 'Would you like to add a collaborator on this project? y/n',
-    default: true
+    default: false
   },
   {
     type: 'input',
@@ -176,7 +176,7 @@ const questions = () => {
     type: 'list',
     message: 'What license does this project have? Use the space bar to select an option',
     name: 'license',
-    choices: ['No License', 'MIT', 'GNU AGPLv3', 'GNU GPLv3', 'GNU LGPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'Boost Software License 1.0', 'The Unlicense', 'Other or I prefer to enter my own license details.']
+    choices: ['MIT', 'agpl-3.0', 'gpl-3.0', 'lgpl-3.0', 'mpl-2.0', 'apache-2.0', 'bsl-1.0', 'unlicense']
 },
 //If you have any other information to add to the license section, please enter it here.  If not, just press enter.
 {
@@ -196,7 +196,7 @@ const questions = () => {
     type: 'confirm',
     name: 'confirmFeature',
     message: 'Would you like to add a summary of features? y/n',
-    default: true
+    default: false
 },
 //Please add your summary of features here.
   {
