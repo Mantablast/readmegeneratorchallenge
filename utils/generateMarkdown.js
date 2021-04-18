@@ -12,6 +12,7 @@ function assignBadgecolor(license) {
     let badgeColor = "blue";
   }
   renderLicenseBadge(license, badgeColor);
+  renderLicenseLink(license);
 }
 
 function renderLicenseBadge(license, badgeColor) {
@@ -31,7 +32,7 @@ function renderLicenseLink(license) {
   let license = " ";
   }
   else {
-    let licenseUrl = "https://choosealicense.com/licenses/${license}";
+    let licenseUrl = "https://choosealicense.com/licenses/" + license;
   }
 }
 
@@ -40,10 +41,46 @@ function renderLicenseLink(license) {
 function renderLicenseSection(license) {}
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-  return `# ${data.title}
-  Name: ${data.name}
+function generateMarkdown(data, year, badgeColor, licenseUrl) {
+  return `# ${data.title}©${year}
 
+## Description
+${data.description}
+
+Project by: ${data.name}
+Repository Link: ${data.githubProjectLink}
+Live Page Url: ${data.DeployedLink}
+
+## Table of Contents
+
+* [Installation](#installation)
+* [Usage](#usage)
+* [Contributon](#credits)
+* [License](#license)
+* [Testing](#testing)
+* [Questions](#questions)
+
+## Installation
+${data.installSteps}
+
+## Usage 
+${data.Usage}
+
+## Contribution
+${data.Collaborator}
+${data.collaboratorLinkInput}
+
+## License
+This project has [![license](https://img.shields.io/badge/license-${data.license}-${badgeColor})
+[Click here for more information on this license](${licenseUrl})
+
+## Testing
+${data.test}
+
+## Questions
+If you have questions or would like to contact for other reasons, please contact
+${data.name}
+Email: ${data.email}
 `;
 }
 

@@ -79,15 +79,9 @@ const questions = () => {
   },
 //Does your project include a deployed web url? y/n
   {
-    type: 'confirm',
-    name: 'confirmDeployedLink',
-    message: 'Does your project include a deployed web url? y/n',
-    default: false
-  },
-  {
     type: 'input',
     name: 'DeployedLink',
-    message: 'Please provide your live deployed web url for your project:',
+    message: 'Please provide your live deployed web url for your project or type "none" if not applicable',
     when: ({ confirmDeployedLink }) => confirmDeployedLink
   },
 //What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
@@ -105,52 +99,43 @@ const questions = () => {
     }
 },
 //Provide instructions and examples for use.
-{
-    type: 'confirm',
-    name: 'confirmUsage',
-    message: 'Would you like to provide examples or instructions for suggested use? (Recommended) y/n',
-    default: false
-  },
   {
     type: 'input',
     name: 'Usage',
-    message: 'Please provide examples or instructions for suggested use here:',
-    when: ({ confirmUsage }) => confirmUsage
+    message: 'Please provide examples or instructions for suggested use here: (Required)',
+    validate: Usage => {
+        if (Usage) {
+          return true;
+        } else {
+          console.log('To ensure your project looks professional, please provide examples or instructions for suggested use here.');
+          return false;
+        }
+      }
   },
-// //Would you like to add screenshots? y/n  **Commented out sections represent questions I would like to add later to adhere to as suggested by the readme-guide.md
-// {
-//     type: 'confirm',
-//     name: 'confirmScreenshot',
-//     message: 'Would you like to add screenshots? y/n',
-//     default: false
-// },
-// //Please provide a web based url or relative filepath to your first screenshot.
-// {
-//     type: 'input',
-//     name: 'Screenshot',
-//     message: 'Please provide a web based url or relative filepath to your first screenshot.',
-//     when: ({ confirmScreenshot }) => confirmScreenshot
-// },
-// //Would you like to add another screenshot and description? y/n
-// {
-//     type: 'confirm',
-//     name: 'confirmScreenshot',
-//     message: 'Would you like to add another screenshot and description? y/n',
-//     default: false
-// },
-//Please enter the name of a collaborator?  **Contributing
-{
-    type: 'confirm',
-    name: 'confirmCollaborator',
-    message: 'Would you like to add a collaborator on this project? y/n',
-    default: false
-  },
-  {
-    type: 'input',
-    name: 'Collaborator',
-    message: 'Please provide the name of the collaborator:',
-    when: ({ confirmCollaborator }) => confirmCollaborator
-  },
+        // //Would you like to add screenshots? y/n  
+
+        //**Commented out sections represent questions I would like to add later to adhere to as suggested by the readme-guide.md
+        
+        // {
+        //     type: 'confirm',
+        //     name: 'confirmScreenshot',
+        //     message: 'Would you like to add screenshots? y/n',
+        //     default: false
+        // },
+        // //Please provide a web based url or relative filepath to your first screenshot.
+        // {
+        //     type: 'input',
+        //     name: 'Screenshot',
+        //     message: 'Please provide a web based url or relative filepath to your first screenshot.',
+        //     when: ({ confirmScreenshot }) => confirmScreenshot
+        // },
+        // //Would you like to add another screenshot and description? y/n
+        // {
+        //     type: 'confirm',
+        //     name: 'confirmScreenshot',
+        //     message: 'Would you like to add another screenshot and description? y/n',
+        //     default: false
+        // },
 //What license does this project have?
 {
     type: 'list',
@@ -164,19 +149,26 @@ const questions = () => {
     name: 'licenseInfo',
     message: 'If you have any other information to add to the license section, please enter it here.  If not, just press enter.'
 },
+//Please enter the name of a collaborator?  **Contributing
+{
+    type: 'confirm',
+    name: 'confirmCollaborator',
+    message: 'Would you like to add a collaborator on this project? y/n',
+    default: false
+},
+{
+    type: 'input',
+    name: 'Collaborator',
+    message: 'Please provide the name of the collaborator:',
+    when: ({ confirmCollaborator }) => confirmCollaborator
+},
 //Please enter the github url or personal webpage of this collaborator.
 {
     type: 'input',
     name: 'collaboratorLinkInput',
     message: 'Please enter the github url or personal webpage of this collaborator. (Required)',
-    validate: collaboratorLinkInput => {
-      if (collaboratorLinkInput) {
-        return true;
-      } else {
-        console.log('You need to enter a project GitHub link!');
-        return false;
-      }
-    }
+    when: ({ confirmCollaborator }) => confirmCollaborator
+    
 },
 //Would you like to add another collaborator? y/n
 {
@@ -185,40 +177,47 @@ const questions = () => {
     message: 'Would you like to add another collaborator? y/n',
     default: false
 },
-// //Select the badges you would like to add to your readme file
-// {
-//     type: 'checkbox',
-//     message: 'Select the badges you would like to add to your readme file:',
-//     name: 'badges',
-//     choices: ['Github follow badge', 'Github downloads', 'Github repo size', 'Twitter follow']
-// },
-// //Would you like to add a summary of features? y/n
-// {
-//     type: 'confirm',
-//     name: 'confirmFeature',
-//     message: 'Would you like to add a summary of features? y/n',
-//     default: false
-// },
-// //Please add your summary of features here.
-//   {
-//     type: 'input',
-//     name: 'Feature',
-//     message: 'Please add your summary of project features here:',
-//     when: ({ confirmFeature }) => confirmFeature
-// },
-// //Are you a supporter and adopter of Contributor Covanent? 
-// {
-//     type: 'confirm',
-//     name: 'confirmFeature',
-//     message: 'Are you a supporter and adopter of Contributor Covanent?  y/n (Please visit https://www.contributor-covenant.org/ and thoroughly read through the documentation before selecting "y") Selecting "y" will add a Contributor Covenant badge to your readme file.',
-//     default: true
-// },
+        // //Select the badges you would like to add to your readme file
+        // {
+        //     type: 'checkbox',
+        //     message: 'Select the badges you would like to add to your readme file:',
+        //     name: 'badges',
+        //     choices: ['Github follow badge', 'Github downloads', 'Github repo size', 'Twitter follow']
+        // },
+        // //Would you like to add a summary of features? y/n
+        // {
+        //     type: 'confirm',
+        //     name: 'confirmFeature',
+        //     message: 'Would you like to add a summary of features? y/n',
+        //     default: false
+        // },
+        // //Please add your summary of features here.
+        //   {
+        //     type: 'input',
+        //     name: 'Feature',
+        //     message: 'Please add your summary of project features here:',
+        //     when: ({ confirmFeature }) => confirmFeature
+        // },
+        // //Are you a supporter and adopter of Contributor Covanent? 
+        // {
+        //     type: 'confirm',
+        //     name: 'confirmFeature',
+        //     message: 'Are you a supporter and adopter of Contributor Covanent?  y/n (Please visit https://www.contributor-covenant.org/ and thoroughly read through the documentation before selecting "y") Selecting "y" will add a Contributor Covenant badge to your readme file.',
+        //     default: true
+        // },
 //Please add the test information you would like to display on your readme.
 {
     type: 'input',
     name: 'Test',
     message: 'Please add the test information you would like to display on your readme.',
-    when: ({ confirmTest }) => confirmTest
+    validate: Test => {
+        if (Test) {
+          return true;
+        } else {
+          console.log('To ensure your readme looks professional, please add the test information you would like to display on your readme!');
+          return false;
+        }
+      }
 },
 //Please enter your email so you may be contacted for questions (Required)
 {
