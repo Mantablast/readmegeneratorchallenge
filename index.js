@@ -2,6 +2,7 @@
 //add inquirer
 const fs = require('fs'); //is this really needed?
 const inquirer = require('inquirer');
+const path = require('path');
 const generateMarkdown = require("./utils/generateMarkdown");
 // TODO: Create an array of questions for user input
 const questions = () => {
@@ -247,13 +248,13 @@ const questions = () => {
 })
 };
 
-
 // TODO: Create a function to write README file
 function writeToFile(response) {
     console.log(response);
     console.log(response.name);
     const wholeObject = generateMarkdown(response);
     console.log(wholeObject);
+    fs.writeFileSync(path.join(process.cwd(), "README.md"), wholeObject);
 };
 
 // TODO: Create a function to initialize app
