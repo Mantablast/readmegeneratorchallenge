@@ -1,55 +1,57 @@
 console.log("Entered generateMarkdown js file!")
 //Add the current year to the copyright section
 let year = new Date().getFullYear();
+
 // TODO: Create a function that returns a license badge based on which license is passed in
 
 // If there is no license, return an empty string
-function assignBadgecolor(license) {
-  if(license === "MIT") {
+function assignBadgecolor() {
+  if(data.license === "MIT") {
     let badgeColor = "green";
   }
   else {
     let badgeColor = "blue";
   }
-  renderLicenseBadge(license, badgeColor);
-  renderLicenseLink(license);
+  renderLicenseBadge(data, badgeColor);
 }
 
-function renderLicenseBadge(license, badgeColor) {
-  if(license === "unlicense") {
-    let license = " ";
+function renderLicenseBadge(data, badgeColor) {
+  if(data.license === "unlicense") {
+    let license = "";
+    renderLicenseLink(data, badgeColor);
   } else {
-  return `
-  [![license](https://img.shields.io/badge/license-${data.license}-${badgeColor})
-  `
+    renderLicenseLink(data, badgeColor);
   }
 }
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) {
-  if(license === "unlicense") {
-  let license = " ";
+function renderLicenseLink(data, badgeColor) {
+  if(data.license === "unlicense") {
+  let license = "";
+  generateMarkdown(data, badgeColor, licenseUrl);
   }
   else {
-    let licenseUrl = "https://choosealicense.com/licenses/" + license;
+  let licenseUrl = "https://choosealicense.com/licenses/" + data.license;
+  generateMarkdown(data, badgeColor, licenseUrl);
   }
 }
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license) {}
+// function renderLicenseSection(license) {}
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data, year, badgeColor, licenseUrl) {
+function generateMarkdown(data, badgeColor, licenseUrl) {
   return `# ${data.title}©${year}
 
 ## Description
 ${data.description}
 
-Project by: ${data.name}
-Repository Link: ${data.githubProjectLink}
-Live Page Url: ${data.DeployedLink}
+Project by: ${data.name}  
+Repository Link: ${data.githubProjectLink}  
+Live Page Url:  
+[${data.DeployedLink}](${data.DeployedLink})
 
 ## Table of Contents
 
@@ -67,21 +69,24 @@ ${data.installSteps}
 ${data.Usage}
 
 ## Contribution
-${data.Collaborator}
-${data.collaboratorLinkInput}
+${data.Collaborator}  
+[${data.CollaboratorLinkInput}](${data.CollaboratorLinkInput})
 
 ## License
-This project has [![license](https://img.shields.io/badge/license-${data.license}-${badgeColor})
-[Click here for more information on this license](${licenseUrl})
+![img](https://img.shields.io/badge/license-${data.license}-${badgeColor})
+[Click here for more information on this license](https://choosealicense.com/licenses/${licenseUrl})
+
 
 ## Testing
-${data.test}
+${data.Test}
 
 ## Questions
 If you have questions or would like to contact for other reasons, please contact
-${data.name}
+${data.name}  
 Email: ${data.email}
 `;
 }
 
+// assignBadgecolor();
 module.exports = generateMarkdown;
+

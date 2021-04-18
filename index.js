@@ -1,6 +1,6 @@
 // TODO: Include packages needed for this application
 //add inquirer
-const fs = require('fs'); //is this really needed?
+const fs = require('fs'); //update delete write etc
 const inquirer = require('inquirer');
 const path = require('path');
 const generateMarkdown = require("./utils/generateMarkdown");
@@ -81,8 +81,8 @@ const questions = () => {
   {
     type: 'input',
     name: 'DeployedLink',
-    message: 'Please provide your live deployed web url for your project or type "none" if not applicable',
-    when: ({ confirmDeployedLink }) => confirmDeployedLink
+    message: 'Please provide your live deployed web url for your project or type "none" if not applicable'
+    
   },
 //What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
 {
@@ -115,7 +115,7 @@ const questions = () => {
         // //Would you like to add screenshots? y/n  
 
         //**Commented out sections represent questions I would like to add later to adhere to as suggested by the readme-guide.md
-        
+
         // {
         //     type: 'confirm',
         //     name: 'confirmScreenshot',
@@ -150,33 +150,9 @@ const questions = () => {
     message: 'If you have any other information to add to the license section, please enter it here.  If not, just press enter.'
 },
 //Please enter the name of a collaborator?  **Contributing
-{
-    type: 'confirm',
-    name: 'confirmCollaborator',
-    message: 'Would you like to add a collaborator on this project? y/n',
-    default: false
-},
-{
-    type: 'input',
-    name: 'Collaborator',
-    message: 'Please provide the name of the collaborator:',
-    when: ({ confirmCollaborator }) => confirmCollaborator
-},
-//Please enter the github url or personal webpage of this collaborator.
-{
-    type: 'input',
-    name: 'collaboratorLinkInput',
-    message: 'Please enter the github url or personal webpage of this collaborator. (Required)',
-    when: ({ confirmCollaborator }) => confirmCollaborator
-    
-},
+ 
 //Would you like to add another collaborator? y/n
-{
-    type: 'confirm',
-    name: 'confirmCollaborator',
-    message: 'Would you like to add another collaborator? y/n',
-    default: false
-},
+
         // //Select the badges you would like to add to your readme file
         // {
         //     type: 'checkbox',
@@ -235,8 +211,49 @@ const questions = () => {
   }
 ])
 .then((response) => {
-    console.log("Questions Complete.");
-    writeToFile(response);
+    console.log("Questions are almost complete!");
+    inquirer.prompt({
+        type: 'confirm',
+        name: 'confirmCollaborator',
+        message: 'Would you like to add another collaborator? y/n',
+        default: false
+    }).then(response2 => {
+        if (response2.confirmCollaborator) {
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'Collaborator',
+                    message: 'Please provide the name of the collaborator:',
+                   
+                },
+                //Please enter the github url or personal webpage of this collaborator.
+                {
+                    type: 'input',
+                    name: 'CollaboratorLinkInput',
+                    message: 'Please enter the github url or personal webpage of this collaborator. (Required)',
+                    
+                    
+                },
+            ])
+            .then(response3 =>{
+                response.Collaborator = response3.Collaborator
+                response.CollaboratorLinkInput = response3.CollaboratorLinkInput
+                writeToFile(response);
+                console.log("Success!  Your README.md file has been generated.");
+            })
+        } 
+        else {
+            response.Collaborator = "";
+            response.CollaboratorLinkInput = "";
+            writeToFile(response);
+            console.log("Success!  Your README.md file has been generated.");
+        }
+       
+    })
+
+
+
+    
 })
 };
 
