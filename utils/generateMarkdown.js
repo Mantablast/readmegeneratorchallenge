@@ -32,8 +32,7 @@ function renderLicenseLink(data, badgeColor) {
   generateMarkdown(data, badgeColor, licenseUrl);
   }
   else {
-  let licenseUrl = "https://choosealicense.com/licenses/" + data.license;
-  generateMarkdown(data, badgeColor, licenseUrl);
+  generateMarkdown(data, badgeColor);
   }
 }
 
