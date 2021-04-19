@@ -54,7 +54,7 @@ function generateMarkdown(data) {
 
   let license = renderLicenseBadge(data.license);
 
-  return `# ${data.title}©${year}
+  return `# ${data.title} ©${year} ${license}
 
 ## Description
 ${data.description}

@@ -1,12 +1,12 @@
-# test©2021
+# Readme Generator Challenge ©2021 ![img](https://img.shields.io/badge/license-MIT-green)
 
 ## Description
-asd
+This challenge generates a professional README markdown file for our repositories which includes badges, titles and links.
 
-Project by: jake  
-Repository Link: asd  
+Project by: Aimee Jesso  
+Repository Link: https://github.com/MissAimeeJay/readmegeneratorchallenge  
 Live Page Url:  
-[asd](asd)
+[none](none)
 
 ## Table of Contents
 
@@ -18,10 +18,10 @@ Live Page Url:
 * [Questions](#questions)
 
 ## Installation
-asd
+Step 1. Clone the repository Step 2. Npm must be installed to successfully operate this readme generator.  This can be done with     npm install -g npm     in the command line Step 3.  Type    npm install inquirer    in the command line
 
 ## Usage 
-asd
+This generator can be used for any Github project whether it be collaborative or a single user project.
 
 ## Contribution
   
@@ -33,9 +33,9 @@ asd
 
 
 ## Testing
-asd
+This readme generator can be tested by attempting to move onto the next question without answering it.  A console log will prompt the user to again answer the question.
 
 ## Questions
 If you have questions or would like to contact for other reasons, please contact
-jake  
-Email: hjak@gmail.com
+Aimee Jesso  
+Email: ajesso@post.com

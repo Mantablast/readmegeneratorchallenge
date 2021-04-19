@@ -177,11 +177,11 @@ const questions = () => {
     ],
 },
 //If you have any other information to add to the license section, please enter it here.  If not, just press enter.
-{
-    type: 'input',
-    name: 'licenseInfo',
-    message: 'If you have any other information to add to the license section, please enter it here.  If not, just press enter.'
-},
+// {
+//     type: 'input',
+//     name: 'licenseInfo',
+//     message: 'If you have any other information to add to the license section, please enter it here.  If not, just press enter.'
+// },
 //Please enter the name of a collaborator?  **Contributing
  
 //Would you like to add another collaborator? y/n
@@ -273,7 +273,6 @@ const questions = () => {
                 response.CollaboratorLinkInput = response3.CollaboratorLinkInput
                 writeToFile(response);
                 console.log("Success!  Your README.md file has been generated.");
-                console.log(license);
             })
         } 
         else {
