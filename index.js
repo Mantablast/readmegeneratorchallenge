@@ -141,7 +141,40 @@ const questions = () => {
     type: 'list',
     message: 'What license does this project have? Use the space bar to select an option',
     name: 'license',
-    choices: ['MIT', 'AGPL-3.0', 'GPL-3.0', 'LGPL-3.0', 'MPL-2.0', 'APACHE-2.0', 'BSL-1.0', 'unlicense']
+    choices: [
+        {
+            name: 'MIT',
+            value: 'mit',
+        },
+        {
+            name: 'GNU GPLv3',
+            value: 'gpl-3.0',
+        },
+        {
+            name: 'GNU AGPLv3',
+            value: 'agpl-3.0',
+        },
+        {
+            name: 'GNU LGPLv3',
+            value: 'lgpl-3.0',
+        },
+        {
+            name: 'APACHE 2.0',
+            value: 'apache-2.0',
+        },
+        {
+            name: 'Mozilla Public 2.0',
+            value: 'mpl-2.0',
+        },
+        {
+            name: 'The Unlicense',
+            value: 'unlicense',
+        },
+        {
+            name: 'Boost Software 1.0 ',
+            value: 'bsl-1.0',
+        },
+    ],
 },
 //If you have any other information to add to the license section, please enter it here.  If not, just press enter.
 {
@@ -240,6 +273,7 @@ const questions = () => {
                 response.CollaboratorLinkInput = response3.CollaboratorLinkInput
                 writeToFile(response);
                 console.log("Success!  Your README.md file has been generated.");
+                console.log(license);
             })
         } 
         else {
@@ -247,6 +281,7 @@ const questions = () => {
             response.CollaboratorLinkInput = "";
             writeToFile(response);
             console.log("Success!  Your README.md file has been generated.");
+            console.log(license);
         }
        
     })

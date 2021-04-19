@@ -1,47 +1,46 @@
 console.log("Entered generateMarkdown js file!")
 //Add the current year to the copyright section
 let year = new Date().getFullYear();
-
 // TODO: Create a function that returns a license badge based on which license is passed in
 
 // If there is no license, return an empty string
-function assignBadgecolor() {
-  if(data.license === "MIT") {
-    let badgeColor = "green";
-  }
-  else {
-    let badgeColor = "blue";
-  }
-  renderLicenseBadge(data, badgeColor);
-}
 
-function renderLicenseBadge(data, badgeColor) {
-  if(data.license === "unlicense") {
-    let license = "";
-    renderLicenseLink(data, badgeColor);
-  } else {
-    renderLicenseLink(data, badgeColor);
-  }
-}
+
+// function renderLicenseBadge(data, badgeColor) {
+//   if(data.license === "unlicense") {
+//     let license = "";
+//     renderLicenseLink(data, badgeColor);
+//   } else {
+//     renderLicenseLink(data, badgeColor);
+//   }
+// }
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(data, badgeColor) {
-  if(data.license === "unlicense") {
-  let license = "";
-  generateMarkdown(data, badgeColor, licenseUrl);
-  }
-  else {
-  generateMarkdown(data, badgeColor);
-  }
-}
+// function renderLicenseLink(data, badgeColor) {
+//   if(data.license === "unlicense") {
+//   let license = "";
+//   generateMarkdown(data, badgeColor, licenseUrl);
+//   }
+//   else {
+//   generateMarkdown(data, badgeColor);
+//   }
+// }
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
 // function renderLicenseSection(license) {}
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data, badgeColor, licenseUrl) {
+function generateMarkdown(data) {
+    // if(data.license === "unlicense") {
+    //   data.license = "";
+    // }
+    // else {
+    //   data.license = data.license;
+    // }
+
+  
   return `# ${data.title}©${year}
 
 ## Description
@@ -72,8 +71,8 @@ ${data.Collaborator}
 [${data.CollaboratorLinkInput}](${data.CollaboratorLinkInput})
 
 ## License
-![img](https://img.shields.io/badge/license-${data.license}-${badgeColor})
-[Click here for more information on this license](https://choosealicense.com/licenses/${licenseUrl})
+![img](https://img.shields.io/badge/license-${data.license.name}-blue)
+[Click here for more information on this license](https://choosealicense.com/licenses/${data.license})
 
 
 ## Testing
