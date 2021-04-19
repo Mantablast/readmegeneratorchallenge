@@ -281,7 +281,6 @@ const questions = () => {
             response.CollaboratorLinkInput = "";
             writeToFile(response);
             console.log("Success!  Your README.md file has been generated.");
-            console.log(license);
         }
        
     })
