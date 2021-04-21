@@ -2,7 +2,7 @@ console.log("Entered generateMarkdown js file!")
 //Add the current year to the copyright section
 let year = new Date().getFullYear();
 
-//Generating links for the badges
+//Generating links for the badges 
 function renderLicenseBadge(license) {
   if (license === "gpl-3.0") {
     return '![img](https://img.shields.io/badge/license-GPL%20v3.0-blue)'
@@ -41,6 +41,7 @@ function generateMarkdown(data) {
 ${data.description}
 
 Project by: ${data.name}  
+Main Github: [${data.githubName}](https://github.com/${data.githubName})
 Repository Link: ${data.githubProjectLink}  
 Live Page Url:  
 [${data.DeployedLink}](${data.DeployedLink})
@@ -76,6 +77,7 @@ ${data.Test}
 If you have questions or would like to contact for other reasons, please contact
 ${data.name}  
 Email: ${data.email}
+Main Github: [${data.githubName}](https://github.com/${data.githubName})
 `;
 }
 
